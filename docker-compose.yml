@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+
+  playwright:
+    build: .
+    container_name: playwright-tests
+    depends_on:
+      - mock-api
+      - mysql
+    volumes:
+      - .:/app
+    command: npx playwright test
+
+  mock-api:
+    image: node:18
+    working_dir: /app
+    volumes:
+      - ./mock-api:/app
+    command: sh -c "npm install && node server.js"
+    ports:
+      - "3000:3000"
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: testdb
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
