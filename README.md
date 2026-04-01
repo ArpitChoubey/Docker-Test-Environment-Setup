@@ -1,4 +1,4 @@
-🚀 Docker Test Environment Setup (Playwright + Mock API + DB)
+🚀 Dockerized Test Environment for Automation Framework (Playwright + Mock API + DB)
 
 This repository demonstrates a complete, production-like test environment setup using Docker, designed specifically for automation testing with Playwright.
 
